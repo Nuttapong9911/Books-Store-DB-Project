@@ -13,7 +13,9 @@ class Office extends Model
     protected $fillable = [
         'address_line1',
         'address_line2',
-        'province',
+        'country',
+        'state',
+        'city',
         'territory',
         'postel_code'
     ];

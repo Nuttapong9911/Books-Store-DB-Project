@@ -17,7 +17,9 @@ return new class extends Migration
             $table->id('office_code');
             $table->string('address_line1', 255);
             $table->string('address_line2', 255)->nullable();
-            $table->string('province');
+            $table->string('country')->nullable();
+            $table->string('state')->nullable();
+            $table->string('city')->nullable();
             $table->string('territory')->nullable();
             $table->string('postel_code');
             $table->timestamps();
