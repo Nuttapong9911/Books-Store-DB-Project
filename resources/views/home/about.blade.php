@@ -2,6 +2,16 @@
 @section('content')
 
 <style>
+    .anime {
+    background-image: url('https://scontent.fcnx3-1.fna.fbcdn.net/v/t1.15752-9/261531025_3222634841356110_721914774512938182_n.png?_nc_cat=106&ccb=1-7&_nc_sid=ae9488&_nc_eui2=AeGN9aWqT6eaK8SjSoz7cBLhrEnMG0qAGpqsScwbSoAamgvmfeaOp1Ft5qrPzXx0KO7pOV0phRqOgRAn5zBGcYef&_nc_ohc=QNacV8ez4c8AX9sEVkT&_nc_ht=scontent.fcnx3-1.fna&oh=03_AdTfOBNmoljsBs_KNXyfg4HHnykdo9PWBClbToYsrJ5ViA&oe=638F296B');
+    background-size: cover;
+
+
+
+    height: 100vh;
+    padding: 0;
+    margin: 0;
+}
     h4{
         padding-top: 20px;
     }
