@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
+use App\Models\Customer;
 
 class RegisterController extends Controller
 {
@@ -30,6 +31,9 @@ class RegisterController extends Controller
     public function register(RegisterRequest $request) 
     {
         $user = User::create($request->validated());
+
+        Customer::create(['user_ID' => $user['user_ID']]);
+
         auth()->login($user);
         return redirect('/')->with('success', "Account successfully registered.");
     }
