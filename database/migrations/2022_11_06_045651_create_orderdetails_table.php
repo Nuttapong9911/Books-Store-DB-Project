@@ -23,7 +23,6 @@ return new class extends Migration
             $table->foreign('ISBN')->references('ISBN')->on('products')->onDelete('cascade');
             $table->foreign('order_num')->references('order_num')->on('orders')->onDelete('cascade');
 
-
             
             $table->timestamps();
         });

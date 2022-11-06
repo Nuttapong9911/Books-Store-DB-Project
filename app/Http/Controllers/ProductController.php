@@ -92,32 +92,38 @@ class ProductController extends Controller
 
         // find the order which has product that has same name with the selected product
         $order = DB::table('orders')
-            ->join('orderdetails', 'orders.order_num', '=', 'orderdetails.order_num')
-            ->where('orders.customer_ID', $customer_id)
-            ->where('orderdetails.ISBN', $ISBN)
-            ->where('orders.status', 'unpaid')
+            ->where('customer_ID', $customer_id)
+            ->where('status', 'unpaid')
             ->first();
-            
-
-        // find the cart which has product that has same name with the selected product
-        // $order = Order::where([
-        //     'name' => $book->name,
-        //     'owner_id' => Auth::id()
-        //     ])->first();
-
         
-
-        \DB::transaction(function () use($product, $order, $customer_id){
+            
+        \DB::transaction(function () use($product, $order, $customer_id, $ISBN){
 
             // if the cart already has selected product
             // the cart's quantity + 1
             if($order != null) {
-                $save_order = Orderdetail::where('order_num', $order->order_num)->first();
-                $save_order->quantity = $save_order->quantity + 1;
-                $save_order->save();
-            } 
+                // $order_detail_selected = Orderdetail::where('order_num', $order->order_num)->where('ISBN', $order_detail->ISBN)->first();
+                $order_detail = Orderdetail::
+                    where('ISBN', $ISBN)
+                    ->where('order_num', $order->order_num)
+                    ->first();
+
+                    if($order_detail == null){
+                        $new_order_detail = new Orderdetail();
+                        $order_detail = new Orderdetail();
+                        $order_detail->ISBN = $product->ISBN;
+                        $order_detail->order_num = $order->order_num;
+                        $order_detail->price_each = $product->buy_price;
+                        $order_detail->quantity = 1;
+                        
+                        $order_detail->save();
+                    }else{
+                        $order_detail -> quantity = $order_detail -> quantity +1;
+                        $order_detail->save();
+                    }
+                
             // else add new cart
-            else {
+            }else {
                 $order = new Order();
                 $order->status = 'unpaid';
                 $order->order_date = date("Y/m/d");
@@ -129,7 +135,6 @@ class ProductController extends Controller
                 $order_detail->order_num = $order->order_num;
                 $order_detail->price_each = $product->buy_price;
                 $order_detail->quantity = 1;
-                
                 
                 $order_detail->save();
             }
@@ -143,6 +148,64 @@ class ProductController extends Controller
         session()->flash('flash_msg', 'Product added to cart successfully!');
 
         return redirect()->back()->with('success', 'Product added to cart successfully!');
+    }
+
+
+    /**
+     * Remove the product from cart
+     *
+     * @param cart id
+     * 
+     * @return \Illuminate\Http\Response
+     * 
+     */    
+    public function remove($ISBN)
+    {
+
+        $owner_id = Auth::id();
+
+        $customer = DB::table('customers')
+            ->where('user_ID', $owner_id)
+            ->select('customer_ID')
+            ->first();
+
+        $customer_ID = $customer->customer_ID;
+
+        $order = DB::table('orders')
+            ->where('customer_ID', $customer_ID)
+            ->where('status', 'unpaid')
+            ->first();
+
+        $order_detail = Orderdetail::where('ISBN', $ISBN)
+            ->where('order_num', $order->order_num)
+            ->first();
+
+        // find the cart by id
+        // carts have lots of (mini)cart which has one type of product
+
+        // find the product which has same name with product in the cart
+        $product = Product::where('ISBN', '=', $ISBN)->first();
+
+
+        \DB::transaction(function () use($product, $order_detail, $order){
+
+            // return products in the cart to stock
+            $product->quantity_stock = $product->quantity_stock + $order_detail->quantity ;
+            $product->save();
+
+            $order_num = $order_detail->order_num;
+
+            // delete the cart
+            $order_detail->delete();
+
+            if(DB::table('orderdetails')->where('order_num', $order_num)->first() == null)
+                Order::where('order_num', $order_num)->delete();
+        });
+
+        // flash a message popup
+        session()->flash('flash_dlt_msg', 'Product removed successfully');
+
+        return back()->with('success', 'Product removed successfully');
     }
 
 
