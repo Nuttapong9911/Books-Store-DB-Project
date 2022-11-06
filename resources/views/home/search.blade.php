@@ -68,7 +68,6 @@
     @endauth
 
     @guest
-    <h1>Homepage</h1>
     <p class="lead">You have to login before buy the products.</p>
 
 
