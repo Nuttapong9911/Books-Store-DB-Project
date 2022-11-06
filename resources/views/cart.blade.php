@@ -46,6 +46,11 @@ h4 {
 </style>
 <div class=" p-5 rounded my-5 shadow " style="background-color:rgba(255, 255, 255, 0.5);">
 
+<div class="justify-content-center text-center mb-5">
+        <h1 class="justify-content-center book-font">
+            <h1><strong>CART</strong></h1>
+    </div>
+
 <table>
     @auth
     <thead>
@@ -75,7 +80,7 @@ h4 {
             </td>
             <td>{{ $cart['name'] }}</td>
             <td class="inner-table">{{ $cart['price'] }}</td>
-            <td class="inner-table">{{ $cart['quantity'] }}
+            <td class="inner-table">{{ $cart['quantity'] }}</td>
             <td data-th="Subtotal" class="text-center">{{$cart['price']*$cart['quantity']}}</td>
             <td>
                 <form action="{{ url('remove-from-cart/'.$cart['id']) }}" method="POST">
@@ -90,7 +95,7 @@ h4 {
     <tfoot>
         <tr>
             <td colspan="5" class="text-right">
-                <h3><strong>Total {{ $total }}<h3><strong>
+                <h3><strong>Total {{ $total }}<strong><h3>
             </td>
         </tr>
         <tr>
