@@ -45,9 +45,9 @@ Route::group(['namespace' => 'App\Http\Controllers'], function() {
         */
         Route::get('/logout', 'LogoutController@perform')->name('logout.perform');
 
-        // Route::get('/cart', 'Bookcontroller@cart')->name('cart');
-        // Route::get('/add-to-cart/{ISBN}', 'Bookcontroller@addToCart')->name('add.to.cart');
-        // Route::delete('/remove-from-cart/{ISBN}', 'Bookcontroller@remove')->name('remove.from.cart');
+        Route::get('/cart', 'Bookcontroller@cart')->name('cart');
+        Route::get('/add-to-cart/{ISBN}', 'Bookcontroller@addToCart')->name('add.to.cart');
+        Route::delete('/remove-from-cart/{ISBN}', 'Bookcontroller@remove')->name('remove.from.cart');
     });
 
 

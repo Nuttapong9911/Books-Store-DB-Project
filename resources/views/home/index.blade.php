@@ -29,7 +29,7 @@
                 @foreach($products as $product)
                 <div class="col-xs-18 col-sm-6 col-md-3">
                     <div class="thumbnail">
-                        <img src="{{ $product->cover }}" width="156" height="216" alt="">
+                        <img src="{{ $product->image }}" width="156" height="216" alt="">
                         <div class="caption">
                             <h4 class="mx-auto">{{ $product->product_name }}</h4>
                             <p>{{ $product->product_description }}</p>
@@ -58,7 +58,7 @@
                 @foreach($products as $product)
                 <div class="col-xs-18 col-sm-6 col-md-3">
                     <div class="thumbnail">
-                        <img class="flex-center" src="{{ $product->cover }}" width="156" height="216" alt="">
+                        <img class="flex-center" src="{{ $product->image }}" width="156" height="216" alt="">
                         <div class="caption">
                             <h4 class="mx-auto padding 3px">{{ $product->product_name }}</h4>
                             <p>{{ $product->product_description }}</p>
