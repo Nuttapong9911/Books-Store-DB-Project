@@ -208,5 +208,9 @@ class ProductController extends Controller
         return back()->with('success', 'Product removed successfully');
     }
 
+    public function about(){
+        return view('home.about');
+    }
+
 
 }
