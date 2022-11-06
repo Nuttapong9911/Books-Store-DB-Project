@@ -34,10 +34,14 @@
 
             <!-- Search box -->
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" type="get" action="{{ url('/search') }}">
+            <div>
                 <div class=""><input type="search" class="form-control form-control-dark" name="query" placeholder="Search..." aria-label="Search">
                 </div>
+                <button class = "btn btn-outline-light my-2 my-sm-0 mx-3 " type="submit" >Search</button>
+            </div>    
+            
             </form>
-            <button class = "btn btn-outline-light my-2 my-sm-0 mx-3 " type="submit" >Search</button>
+            
             
             <!-- after login, this will show logout button -->
             @auth
