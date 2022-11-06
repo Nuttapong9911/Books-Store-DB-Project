@@ -13,22 +13,22 @@ float: right;
  margin: 0 0 0 15px;
 }
 </style>
-
-<div class="my-5 rounded-5 bg-dark text-white p-5 rounded shadow ">
+<div class="hp">
+    <img src="https://cdn.pixabay.com/photo/2013/07/12/17/20/leaf-152047_960_720.png" width="400" height="400" id="hp"></div>
+<div class="my-5 rounded-5 bg-dark text-white p-5 rounded shadow  " style="height: 400px">
 
 
 
     <h1>About</h1>
+    
     <h1 class="">Clover Leaf Co.</h1>
-    <div class="hp">
-    <img src="https://cdn.pixabay.com/photo/2013/07/12/17/20/leaf-152047_960_720.png" width="400" height="400" id="hp"></div>
     <body>OUR DEPARTMENT AT </body>
-
+    
 
     <div class="flex-center position-ref full-height">
         <div class="content">
-            <p>store</p>
-            <div class="row">
+            <p></p>
+            <div class="row d-flex rem-4">
             </div>
         </div>
     </div>
