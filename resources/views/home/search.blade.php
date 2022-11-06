@@ -96,7 +96,6 @@
         </div>
     </div>
     @endguest
-    {!! $products -> links('pagination::bootstrap-5') !!}
 </div>
 
 

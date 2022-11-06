@@ -213,9 +213,9 @@ class ProductController extends Controller
     }
 
     public function search(){
-        $search_text = $Get['query'];
-        $product = Product::where('title','LIKE','%'.$search_text.'%')->get();
-        return view('home.search',compact('product'));
+        $search_text = $_GET['query'];
+        $products = Product::where('product_name','LIKE','%'.$search_text.'%')->get();
+        return view('home.search',compact('products'));
     }
 
 
