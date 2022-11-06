@@ -25,6 +25,10 @@
             font-size: 3.5rem;
         }
     }
+    div.t1{
+        width: 40%;
+        margin: auto;
+    }
     </style>
     <!-- Custom styles for this template -->
     <link href="signin.css" rel="stylesheet">
