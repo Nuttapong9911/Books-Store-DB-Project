@@ -50,6 +50,9 @@
             <div type="button" class = "text end mx-3">
                 <a href="{{url('cart')}}" class = "btn btn-outline-light me-1" >Cart</a>
             </div>
+            <div type="button" class = "text end mr-3">
+                <a href="{{url('history')}}" class = "btn btn-outline-light me-1" >History</a>
+            </div>
             <div class="text-end">
                 <a href="{{ route('logout.perform') }}" class="btn btn-outline-light me-1">Logout</a>
             </div>

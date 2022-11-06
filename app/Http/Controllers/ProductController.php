@@ -67,6 +67,45 @@ class ProductController extends Controller
 
 
     /**
+     * Display a listing of purchased products in the cart.
+     *
+     * @return \Illuminate\Http\Response
+     * 
+     */
+    public function history()
+    {
+        $owner_id = Auth::id();
+
+        $customer = DB::table('customers')
+            ->where('user_ID', $owner_id)
+            ->select('customer_ID')
+            ->first();
+        
+        $orders = DB::table('orders')
+            ->join('orderdetails', 'orders.order_num', '=', 'orderdetails.order_num')
+            ->join('products', 'orderdetails.ISBN', '=', 'products.ISBN')
+            ->where('status', 'paid')
+            ->where('customer_ID', $customer->customer_ID)
+            ->get();
+
+        $carts = array();
+        foreach ($orders as $value) {
+            array_push($carts, [
+                'name' => $value -> product_name,
+                'id' => $value -> ISBN,
+                'price' => $value -> buy_price,
+                'quantity' => $value -> quantity,
+                'image' => $value -> image,
+                'order_date' => $value -> order_date
+            ]);
+        }
+
+        return view('history',['carts'=>$carts]);
+    }
+
+
+
+    /**
      * Add the product from cart
      *
      * @param product id
