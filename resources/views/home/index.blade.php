@@ -63,7 +63,7 @@
                             <!-- <div  class = "mx-3 my-3"><p  class ="book-font">{{ $product->product_description }}</p></div> -->
                             <div class = "mx-3 my-3 "><p  class ="book-font"><strong>Stock: </strong>{{ $product->quantity_stock }}</p></div>
                             <div class = "flex-1 " stlye="min-height: 1rem;" ></div>
-                            <div class ="price book-font mx-3 rounded  " style ="box-shadow: 0 2px 5px 0 rgba(0,0,0,.2);text-align:center; background-color:pink; color:white "><p><strong>Price:  {{ $product->buy_price }}฿</strong></p></div>
+                            <div class ="price book-font mx-3 rounded  " style ="box-shadow: 0 2px 5px 0 rgba(0,0,0,.2);text-align:center; background-color:4DD197; color:white "><p><strong>Price:  {{ $product->buy_price }}฿</strong></p></div>
                             </div>
                         </div>
                     <!-- </div> -->
@@ -93,7 +93,7 @@
                             <!-- <div  class = "mx-3 my-3"><p  class ="book-font">{{ $product->product_description }}</p></div> -->
                             <div class = "mx-3 my-3 "><p  class ="book-font"><strong>Stock: </strong>{{ $product->quantity_stock }}</p></div>
                             <div class = "flex-1 " stlye="min-height: 1rem;" ></div>
-                            <div class ="price book-font mx-3 rounded  " style ="box-shadow: 0 2px 5px 0 rgba(0,0,0,.2);text-align:center; background-color:pink; color:white "><p><strong>Price:  {{ $product->buy_price }}฿</strong></p></div>
+                            <div class ="price book-font mx-3 rounded  " style ="box-shadow: 0 2px 5px 0 rgba(0,0,0,.2);text-align:center; background-color:#4DD197; color:white "><p><strong>Price:  {{ $product->buy_price }}฿</strong></p></div>
                             </div>
                         </div>
                     <!-- </div> -->
