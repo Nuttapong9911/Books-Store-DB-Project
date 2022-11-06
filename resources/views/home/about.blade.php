@@ -22,7 +22,8 @@ float: right;
     <h1>About</h1>
     
     <h1 class="">Clover Leaf Co.</h1>
-    <body>OUR DEPARTMENT AT </body>
+    <body style="font-style:italic; font-size:larger " >OUR DEPARTMENT AT CHIANG MAI UNIVERSITY</body>
+    <img src="https://upload.wikimedia.org/wikipedia/en/2/25/Chiang_mai_university_logo.png" style="width: 100px;"alt="">
     
 
     <div class="flex-center position-ref full-height">

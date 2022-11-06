@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
     <meta name="generator" content="Hugo 0.87.0">
-    <title>This is Title. You can change in app-master.blade.php file :D</title>
+    <title>Clover Leaf Co.</title>
     <!-- Bootstrap core CSS -->
     <link href="{!! url('assets/bootstrap/css/bootstrap.min.css') !!}" rel="stylesheet">
     
@@ -35,9 +35,9 @@
     <link href="{!! url('assets/css/app.css') !!}" rel="stylesheet">
 </head>
 
-<body>
+<body class="anime">
     @include('layouts.partials.navbar')
-    <main class="container">
+    <main class="container " style="" >
         @yield('content')
     </main>
     <script src="{!! url('assets/bootstrap/js/bootstrap.bundle.min.js') !!}"></script>

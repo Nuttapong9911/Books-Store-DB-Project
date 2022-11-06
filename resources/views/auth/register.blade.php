@@ -7,8 +7,10 @@
     <input type="hidden" name="_token" value="{{ csrf_token() }}" />
     
     <!-- Logo -->
-    <img class="mb-4" src="{!! url('https://getbootstrap.com/docs/5.2/assets/brand/bootstrap-logo-shadow.png') !!}"
+    <a href="http://127.0.0.1:8000/">
+    <img class="mb-4"   src="{!! url('https://cdn.pixabay.com/photo/2013/07/12/17/20/leaf-152047_960_720.png') !!}"
         alt="" width="72" height="57">
+    </a>
     
 
     <!-- Heading -->
