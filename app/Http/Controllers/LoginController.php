@@ -34,24 +34,24 @@ class LoginController extends Controller
             return redirect()->to('login') ->withErrors(trans('auth.failed'));
         endif; 
 
-        $customer = Auth::getProvider()->retrieveByCredentials($credentials);
+        $user = Auth::getProvider()->retrieveByCredentials($credentials);
 
-        Auth::login($customer);
+        Auth::login($user);
 
-        return $this->authenticated($request, $customer);
+        return $this->authenticated($request, $user);
     }
 
 
-    /** Handle response after customer authenticated * 
+    /** Handle response after user authenticated * 
      *
      * @param Request $request * 
      * 
-     * @param Auth $customer * 
+     * @param Auth $user * 
      * 
      * @return \Illuminate\Http\Response 
      * 
      */
-    protected function authenticated(Request $request, $customer) {
+    protected function authenticated(Request $request, $user) {
         return redirect()->intended();
     }
 

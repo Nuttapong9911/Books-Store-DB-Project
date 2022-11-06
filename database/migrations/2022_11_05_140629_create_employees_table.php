@@ -15,15 +15,16 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id('emp_num');
-            $table->string('firstname');
-            $table->string('lastname');
-            $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+           
             $table->string('job_title');
             $table->string('extension');
             $table->bigInteger('supervisor')->unsigned()->nullable();
             $table->bigInteger('office_code')->unsigned()->nullable();
             $table->timestamps();
+
+            $table->bigInteger('user_ID')->unsigned();
+            $table->foreign('user_ID')->references('user_ID')->on('users')->onDelete('cascade');
+
 
             $table->foreign('supervisor')->references('emp_num')->on('employees')->onDelete('set null');
             $table->foreign('office_code')->references('office_code')->on('offices')->onDelete('set null');

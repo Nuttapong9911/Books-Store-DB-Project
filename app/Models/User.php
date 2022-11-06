@@ -8,6 +8,10 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+use App\Models\Customer;
+use App\Models\Employee;
+use App\Models\Order;
+
 class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
@@ -18,10 +22,38 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
-        'email',
+        'firstname',
+        'lastname',
+        'username',
         'password',
+        'email'
     ];
+
+    protected $primaryKey = 'user_ID';
+
+    /**
+     * One-To-Many relationship
+     * 
+     * This is One
+     * 
+     */
+    public function customers()
+    {
+        return $this->hasMany(Customer::class);
+    }
+
+    /**
+     * One-To-Many relationship
+     * 
+     * This is One
+     * 
+     */
+    public function employees()
+    {
+        return $this->hasMany(Employee::class);
+    }
+
+
 
     /**
      * The attributes that should be hidden for serialization.

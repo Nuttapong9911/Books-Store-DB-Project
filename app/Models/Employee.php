@@ -6,18 +6,18 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 use App\Models\Office;
+use App\Models\User;
 
 class Employee extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'firstname',
-        'lastname',
-        'email',
         'job_title',
         'extension',
         'supervisor',
-        'office_code'
+        'office_code',
+
+        'user_ID'
     ];
 
     protected $primaryKey = 'emp_num';
@@ -55,6 +55,17 @@ class Employee extends Model
         return $this->hasMany(Employee::class);
     }
 
+
+    /**
+     * One-To-Many relationship
+     * 
+     * This is Many
+     * 
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 
         
 

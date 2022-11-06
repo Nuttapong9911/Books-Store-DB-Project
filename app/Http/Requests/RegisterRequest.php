@@ -29,14 +29,7 @@ class RegisterRequest extends FormRequest
             'email' => 'required|email:rfc,dns|unique:users,email',
             'username' => 'required|unique:users,username',
             'password' => 'required|min:8',
-            'password_confirmation' => 'required|same:password',
-            'phone' => 'nullable',
-            'address line1' => 'nullable',
-            'address line2' => 'nullable',
-            'country' => 'nullable|alpha',
-            'state' => 'nullable|alpha',
-            'city' => 'nullable|alpha',
-            'postel code' => 'nullable'
+            'password_confirmation' => 'required|same:password'
 
         ];
     }
