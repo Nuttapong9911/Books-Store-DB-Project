@@ -212,5 +212,12 @@ class ProductController extends Controller
         return view('home.about');
     }
 
+    public function search(){
+        $search_text = $Get['query'];
+        $product = Product::where('title','LIKE','%'.$search_text.'%')->get();
+        return view('home.search',compact('product'));
+    }
+
+
 
 }

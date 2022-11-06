@@ -20,6 +20,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function() {
     */
     Route::get('/', 'ProductController@index')->name('home.index');
     Route::get('/about','ProductController@about')->name('home.about');
+    Route::get('/search','ProductController@search')->name('home.search');
     Route::group(['middleware' => ['guest']], function() {
     
         /**
