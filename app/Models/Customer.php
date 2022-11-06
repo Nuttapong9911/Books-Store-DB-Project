@@ -5,6 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Order;
+
 class Customer extends Model
 {
     use HasFactory;
@@ -24,4 +26,16 @@ class Customer extends Model
     ];
 
     protected $primaryKey = 'customer_ID';
+
+    /**
+     * One-To-Many relationship
+     * 
+     * This is One
+     * 
+     */
+    public function orders()
+    {
+        return $this->hasMany(Order::class);
+    }
+
 }
