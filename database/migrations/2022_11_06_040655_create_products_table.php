@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('author_name');
             $table->string('image');
 
-            $table->integer('quality_stock');
+            $table->integer('quantity_stock');
             $table->string('buy_price');
 
             $table->bigInteger('type_ID')->unsigned();

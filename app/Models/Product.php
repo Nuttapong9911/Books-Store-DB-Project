@@ -21,7 +21,7 @@ class Product extends Model
         'author_name',
         'image',
 
-        'quality_stock',
+        'quantity_stock',
         'buy_price',
 
         'type_ID'

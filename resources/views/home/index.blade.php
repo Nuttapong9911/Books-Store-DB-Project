@@ -26,17 +26,17 @@
         <div class="content">
             <div class="row">
 
-                @foreach($books as $book)
+                @foreach($products as $product)
                 <div class="col-xs-18 col-sm-6 col-md-3">
                     <div class="thumbnail">
-                        <img src="{{ $book->cover }}" width="156" height="216" alt="">
+                        <img src="{{ $product->cover }}" width="156" height="216" alt="">
                         <div class="caption">
-                            <h4 class="mx-auto">{{ $book->name }}</h4>
-                            <p>{{ $book->description }}</p>
-                            <p><strong>Stock: </strong>{{ $book->stock }}</p>
-                            <p><strong>Price: </strong> {{ $book->price }} ฿</p>
-                            <p class="btn-holder"><a href="{{ route('add.to.cart', $book->ISBN) }}"
-                                    class="btn btn-warning btn-block text-center" role="button">Add to cart</a> </p>
+                            <h4 class="mx-auto">{{ $product->product_name }}</h4>
+                            <p>{{ $product->product_description }}</p>
+                            <p><strong>Stock: </strong>{{ $product->quantity_stock }}</p>
+                            <p><strong>Price: </strong> {{ $product->buy_price }} ฿</p>
+                            <!-- <p class="btn-holder"><a href="{{ route('add.to.cart', $product->ISBN) }}"
+                                    class="btn btn-warning btn-block text-center" role="button">Add to cart</a> </p> -->
                         </div>
                     </div>
                 </div>
@@ -55,15 +55,15 @@
         <div class="content">
             <p>What we have in stocks.</p>
             <div class="row">
-                @foreach($books as $book)
+                @foreach($products as $product)
                 <div class="col-xs-18 col-sm-6 col-md-3">
                     <div class="thumbnail">
-                        <img class="flex-center" src="{{ $book->cover }}" width="156" height="216" alt="">
+                        <img class="flex-center" src="{{ $product->cover }}" width="156" height="216" alt="">
                         <div class="caption">
-                            <h4 class="mx-auto padding 3px">{{ $book->name }}</h4>
-                            <p>{{ $book->description }}</p>
-                            <p><strong>Stock: </strong>{{ $book->stock }}</p>
-                            <p><strong>Price: </strong> {{ $book->price }} ฿</p>
+                            <h4 class="mx-auto padding 3px">{{ $product->product_name }}</h4>
+                            <p>{{ $product->product_description }}</p>
+                            <p><strong>Stock: </strong>{{ $product->quantity_stock }}</p>
+                            <p><strong>Price: </strong> {{ $product->buy_price }} ฿</p>
                         </div>
                     </div>
                 </div>
@@ -72,7 +72,7 @@
         </div>
     </div>
     @endguest
-    {!! $books -> links('pagination::bootstrap-5') !!}
+    {!! $products -> links('pagination::bootstrap-5') !!}
 </div>
 
 
