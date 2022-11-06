@@ -35,8 +35,8 @@
                             <p>{{ $product->product_description }}</p>
                             <p><strong>Stock: </strong>{{ $product->quantity_stock }}</p>
                             <p><strong>Price: </strong> {{ $product->buy_price }} ฿</p>
-                            <!-- <p class="btn-holder"><a href="{{ route('add.to.cart', $product->ISBN) }}"
-                                    class="btn btn-warning btn-block text-center" role="button">Add to cart</a> </p> -->
+                            <p class="btn-holder"><a href="{{ route('add.to.cart', $product->ISBN) }}"
+                                    class="btn btn-warning btn-block text-center" role="button">Add to cart</a> </p>
                         </div>
                     </div>
                 </div>

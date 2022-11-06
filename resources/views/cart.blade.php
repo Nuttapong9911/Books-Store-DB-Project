@@ -26,21 +26,21 @@
 
         @foreach( $carts as $cart )
         <tr>
-            @php $total += $cart->price*$cart->quantity @endphp
+            @php $total += $cart['price']*$cart['quantity'] @endphp
             <td>
                 <div class="row">
-                    <div class="col-sm-3 hidden-xs"><img src="{{ $cart->image }}" width="72" height="100"
+                    <div class="col-sm-3 hidden-xs"><img src="{{ $cart['image'] }}" width="72" height="100"
                             class="img-responsive" /></div>
                     <div class="col-sm-9">
                     </div>
                 </div>
             </td>
-            <td>{{ $cart->name }}</td>
-            <td class="inner-table">{{ $cart->price }}</td>
-            <td class="inner-table">{{ $cart->quantity }}
-            <td data-th="Subtotal" class="text-center">{{$cart->price*$cart->quantity}}</td>
+            <td>{{ $cart['name'] }}</td>
+            <td class="inner-table">{{ $cart['price'] }}</td>
+            <td class="inner-table">{{ $cart['quantity'] }}
+            <td data-th="Subtotal" class="text-center">{{$cart['price']*$cart['quantity']}}</td>
             <td>
-                <form action="{{ url('remove-from-cart/'.$cart->id) }}" method="POST">
+                <form action="{{ url('remove-from-cart/'.$cart['id']) }}" method="POST">
                     @csrf
                     @method('DELETE')
                     <button class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
