@@ -208,6 +208,24 @@ class ProductController extends Controller
         return back()->with('success', 'Product removed successfully');
     }
 
+    public function purchase(){
+        $owner_id = Auth::id();
+
+        $customer_id = DB::table('customers')
+            ->where('user_ID', $owner_id)
+            ->pluck('customer_ID')[0];
+
+        // find the order which has product that has same name with the selected product
+        $orders = Order::where('customer_ID', $customer_id)
+            ->where('status', 'unpaid')
+            ->update(['status' => 'paid']);
+
+        // flash a message popup
+        session()->flash('flash_dlt_msg', 'Product purchased successfully');
+
+        return back()->with('success', 'Product purchased successfully');
+    }
+
     public function about(){
         return view('home.about');
     }

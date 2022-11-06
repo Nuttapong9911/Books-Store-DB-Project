@@ -49,6 +49,7 @@ Route::group(['namespace' => 'App\Http\Controllers'], function() {
         Route::get('/cart', 'Productcontroller@cart')->name('cart');
         Route::get('/add-to-cart/{ISBN}', 'Productcontroller@addToCart')->name('add.to.cart');
         Route::delete('/remove-from-cart/{ISBN}', 'Productcontroller@remove')->name('remove.from.cart');
+        Route::get('/purchase', 'Productcontroller@purchase')->name('purchase');
     });
 
 
