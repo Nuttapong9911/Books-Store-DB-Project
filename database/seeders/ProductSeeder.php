@@ -1826,11 +1826,13 @@ class ProductSeeder extends Seeder
         ];
 
 
+        // create new product types if not exist 
         if(!DB::table('producttypes')->where('type_des', 'novel')->exists())
                 Producttype::create(['type_des' => 'novel']);
         if(!DB::table('producttypes')->where('type_des', 'manga')->exists())
                 Producttype::create(['type_des' => 'manga']);
 
+        // add novel products 
         foreach ($novels as $key => $value) {
 
             if(!DB::table('products')->where('product_name',$value['product_name'])->exists()){
@@ -1840,6 +1842,7 @@ class ProductSeeder extends Seeder
 
         }
 
+        // add manga products 
         foreach ($mangas as $key => $value) {
 
             if(!DB::table('products')->where('product_name',$value['product_name'])->exists()){

@@ -30,7 +30,7 @@ class ProductController extends Controller
 
 
     /**
-     * Display a listing of all products in the cart.
+     * Display a listing of all products in the current (unpaid) order.
      *
      * @return \Illuminate\Http\Response
      * 
@@ -67,7 +67,7 @@ class ProductController extends Controller
 
 
     /**
-     * Display a listing of purchased products in the cart.
+     * Display a listing of purchased products.
      *
      * @return \Illuminate\Http\Response
      * 
@@ -106,9 +106,18 @@ class ProductController extends Controller
 
 
     /**
-     * Add the product from cart
+     * Add the product to current order.
+     * 
+     * If user doesnt have any product in current order,
+     * create new order with new order detail of this product.
+     * 
+     * If user has other products in current order except this product,
+     *  create new order detail of this product with order number of current product.
+     * 
+     * If user already has this product in current order,
+     *  update order detail of this product with +1 in quantity.
      *
-     * @param product id
+     * @param ISBN Product ID
      * 
      * @return \Illuminate\Http\Response
      * 
@@ -123,13 +132,13 @@ class ProductController extends Controller
         // find product by ISBN
         $product = Product::findOrFail($ISBN);
 
+        // find user ID and customer ID
         $owner_id = Auth::id();
-
         $customer_id = DB::table('customers')
             ->where('user_ID', $owner_id)
             ->pluck('customer_ID')[0];
 
-        // find the order which has product that has same name with the selected product
+        // find the current order (if exist)
         $order = DB::table('orders')
             ->where('customer_ID', $customer_id)
             ->where('status', 'unpaid')
@@ -138,15 +147,16 @@ class ProductController extends Controller
             
         \DB::transaction(function () use($product, $order, $customer_id, $ISBN){
 
-            // if the cart already has selected product
-            // the cart's quantity + 1
+            // if unpaid current order is exist
             if($order != null) {
-                // $order_detail_selected = Orderdetail::where('order_num', $order->order_num)->where('ISBN', $order_detail->ISBN)->first();
+
+                // find order detail of this product (if user has ordered this product before or not)
                 $order_detail = Orderdetail::
                     where('ISBN', $ISBN)
                     ->where('order_num', $order->order_num)
                     ->first();
 
+                    // if order detail of this product is not exist (hasn't ordered this before)
                     if($order_detail == null){
                         $new_order_detail = new Orderdetail();
                         $order_detail = new Orderdetail();
@@ -156,12 +166,16 @@ class ProductController extends Controller
                         $order_detail->quantity = 1;
                         
                         $order_detail->save();
-                    }else{
+                    }
+                    
+                    // if order detail of this product is not exist (has ordered this before)
+                    else{
                         $order_detail -> quantity = $order_detail -> quantity +1;
                         $order_detail->save();
                     }
                 
-            // else add new cart
+            // if unpaid current order is not exist
+            // create new order with new order detail of this product
             }else {
                 $order = new Order();
                 $order->status = 'unpaid';
@@ -178,7 +192,7 @@ class ProductController extends Controller
                 $order_detail->save();
             }
 
-            // for both case, remove one product from stock
+            // remove one product from stock
             $product->quantity_stock = $product->quantity_stock-1 ;
             $product->save();
         });
@@ -191,9 +205,9 @@ class ProductController extends Controller
 
 
     /**
-     * Remove the product from cart
+     * Remove products from its order
      *
-     * @param cart id
+     * @param ISBN Product ID
      * 
      * @return \Illuminate\Http\Response
      * 
@@ -201,42 +215,42 @@ class ProductController extends Controller
     public function remove($ISBN)
     {
 
+        // find user ID and customer ID
         $owner_id = Auth::id();
-
         $customer = DB::table('customers')
             ->where('user_ID', $owner_id)
             ->select('customer_ID')
             ->first();
-
         $customer_ID = $customer->customer_ID;
 
+        // find the current order (must exist)
         $order = DB::table('orders')
             ->where('customer_ID', $customer_ID)
             ->where('status', 'unpaid')
             ->first();
 
+        // find order detail of this product
         $order_detail = Orderdetail::where('ISBN', $ISBN)
             ->where('order_num', $order->order_num)
             ->first();
 
-        // find the cart by id
-        // carts have lots of (mini)cart which has one type of product
-
-        // find the product which has same name with product in the cart
+        // find the product user want to remove
         $product = Product::where('ISBN', '=', $ISBN)->first();
 
 
         \DB::transaction(function () use($product, $order_detail, $order){
 
-            // return products in the cart to stock
+            // return all products in the order detail to stock
             $product->quantity_stock = $product->quantity_stock + $order_detail->quantity ;
             $product->save();
 
+            //find its order number
             $order_num = $order_detail->order_num;
 
-            // delete the cart
+            // delete order detail of this product
             $order_detail->delete();
 
+            // if deleted product is the last product in the current order, remove the current order
             if(DB::table('orderdetails')->where('order_num', $order_num)->first() == null)
                 Order::where('order_num', $order_num)->delete();
         });
@@ -247,14 +261,24 @@ class ProductController extends Controller
         return back()->with('success', 'Product removed successfully');
     }
 
-    public function purchase(){
-        $owner_id = Auth::id();
 
+    /**
+     * Purchase all product of unpaid current order
+     * 
+     * change status of unpaid current order to paid
+     * 
+     * @return \Illuminate\Http\Response
+     * 
+     */  
+    public function purchase(){
+        
+        // find user ID and customer ID
+        $owner_id = Auth::id();
         $customer_id = DB::table('customers')
             ->where('user_ID', $owner_id)
             ->pluck('customer_ID')[0];
 
-        // find the order which has product that has same name with the selected product
+        // find the unpaid current order and change its status to paid
         $orders = Order::where('customer_ID', $customer_id)
             ->where('status', 'unpaid')
             ->update(['status' => 'paid']);
@@ -265,10 +289,24 @@ class ProductController extends Controller
         return back()->with('success', 'Product purchased successfully');
     }
 
+
+    /**
+     * Display about page.
+     *
+     * @return \Illuminate\Http\Response
+     * 
+     */
     public function about(){
         return view('home.about');
     }
 
+
+    /**
+     * Display a listing of searched products
+     *
+     * @return \Illuminate\Http\Response
+     * compact of product
+     */
     public function search(){
         $search_text = $_GET['query'];
         $products = Product::where('product_name','LIKE','%'.$search_text.'%')->get();
