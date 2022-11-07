@@ -1,7 +1,9 @@
 # Project-Database-Book-Store
+
 ## About our product
   - Japanese comic (Manga)
   - Japanese Novel
+  
 ## 261343-002 Database Lab
   - Entity_relation 
   - Database 
@@ -15,6 +17,15 @@
   - Cart_Page
   - History_Page
   - About_Page
+ 
+## functions
+  - Register
+  - Login-Logout
+  - add/remove products to cart
+  - purchase
+  - view purchased products (history)
+  - search products
+
 
 ## แผนภาพ ER
 ![image](https://user-images.githubusercontent.com/76035337/200223344-a8756fe1-aa79-4755-b295-5dec8d55a82a.png)
