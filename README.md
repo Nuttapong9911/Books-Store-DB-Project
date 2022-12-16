@@ -1,6 +1,8 @@
 # Project-Database-Bookstore
 Bookstore webpage project using php Laravel library, it also has databases with relationship using XAMPP and phpMyAdmin.
 
+*There are screenshots of our project in folder '**Project examples**'.*
+
 
 ## About our product
   - Japanese comic (Manga)
