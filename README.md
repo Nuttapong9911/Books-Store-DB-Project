@@ -1,16 +1,17 @@
 # Project-Database-Book-Store
+Bookstore webpage project using php Laravel library, it also has databases with relationship using XAMPP and phpMyAdmin.
+
 
 ## About our product
   - Japanese comic (Manga)
   - Japanese Novel
   
-## 261343-002 Database Lab
+## complete requirements
   - Entity_relation 
   - Database 
-  - indexes
   - transaction
 
-## mini web-app
+## pages
   - Login_Page
   - Register_Page
   - Home_Page
