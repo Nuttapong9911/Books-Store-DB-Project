@@ -8,7 +8,7 @@ Bookstore webpage project using php Laravel library, it also has databases with 
   - Japanese comic (Manga)
   - Japanese Novel
   
-## complete requirements
+## completed requirements
   - Entity_relation 
   - Database 
   - transaction
